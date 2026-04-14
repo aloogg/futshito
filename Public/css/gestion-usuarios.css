@@ -1,0 +1,174 @@
+:root {
+    /* Marca - versión más clara pero manteniendo identidad */
+    --brand-primary: #FFCA3A;   /* amarillo más claro */
+    --brand-accent:  #2E8B57;   /* verde más claro */
+    --brand-emphasis:#F2A71B;   /* naranja más claro */
+    --text-color:    #3D3D3D;   /* texto base ligeramente más claro */
+
+    /* Base claro - versión más clara */
+    --bg-page:       #FAF5E1;   /* fondo área de contenido */
+    --bg-card:       #FFFFFF;
+    --bg-input:      #F8FEF9;   /* verde muy suave */
+    --border:        #3CB371;   /* borde con el verde aclarado */
+    --muted:         #7E7E7E;   /* gris más claro */
+
+    /* Estados */
+    --focus-ring:    rgba(255, 202, 58, 0.35); /* ajustado al nuevo amarillo */
+    --shadow-1:      0 6px 20px rgba(0,0,0,0.08); /* sombra más suave */
+    --error-color:   #F67280;   /* error más claro */
+    --error-dark:    #FF8A8A;   /* error oscuro más claro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: var(--brand-primary);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-1);
+}
+
+header h1 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+}
+
+header button {
+    background-color: var(--brand-accent);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+header button:hover {
+    background-color: #267349;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+section {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--border);
+}
+
+section h2 {
+    color: var(--brand-accent);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brand-primary);
+}
+
+/* ==========================================
+   ESTILOS DE TABLA
+   ========================================== */
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: var(--bg-input);
+    color: var(--brand-accent);
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* ==========================================
+   ESTILOS DE REPORTES (TARJETAS INDIVIDUALES)
+   ========================================== */
+.seccion-reportes {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+
+.contenedor-reportes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.reporte-individual {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease-in-out;
+}
+
+.reporte-individual:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.reporte-individual h3 {
+    color: var(--brand-accent);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brand-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reporte-individual ul, .reporte-individual ol {
+    padding-left: 1.2rem;
+    color: var(--text-color);
+}
+
+.reporte-individual li {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.reporte-individual li i {
+    color: var(--brand-emphasis);
+    margin-right: 5px;
+}

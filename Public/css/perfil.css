@@ -1,0 +1,415 @@
+:root {
+    /* Marca - versión más clara pero manteniendo identidad */
+    --brand-primary: #FFCA3A;   /* amarillo más claro */
+    --brand-accent:  #2E8B57;   /* verde más claro */
+    --brand-emphasis:#F2A71B;   /* naranja más claro */
+    --text-color:    #3D3D3D;   /* texto base ligeramente más claro */
+
+    /* Base claro - versión más clara */
+    --bg-page:       #FAF5E1;   /* fondo área de contenido */
+    --bg-card:       #FFFFFF;
+    --bg-input:      #F8FEF9;   /* verde muy suave */
+    --border:        #3CB371;   /* borde con el verde aclarado */
+    --muted:         #7E7E7E;   /* gris más claro */
+
+    /* Estados */
+    --focus-ring:    rgba(255, 202, 58, 0.35); /* ajustado al nuevo amarillo */
+    --shadow-1:      0 6px 20px rgba(0,0,0,0.08); /* sombra más suave */
+    --error-color:   #F67280;   /* error más claro */
+    --error-dark:    #FF8A8A;   /* error oscuro más claro */
+
+    /* Oscuro - deshabilitado para forzar modo claro */
+    --bg-page-dark:  #FFF9E6;   /* mismo que claro */
+    --bg-card-dark:  #FFFFFF;   /* mismo que claro */
+    --bg-input-dark: #F8FEF9;   /* mismo que claro */
+    --border-dark:   #3CB371;   /* mismo que claro */
+    --text-dark:     #3D3D3D;   /* mismo que claro */
+}
+
+/* perfil.css */
+
+/* =========================
+   Variables y Base
+========================= */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--brand-primary);
+    color: #fff;
+    padding: 1rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* =========================
+   Sección de información
+========================= */
+.user-info {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-1);
+}
+
+.user-info h2 {
+    margin-top: 0;
+    color: var(--brand-accent);
+}
+
+.user-info p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.user-info span {
+    font-weight: 600;
+}
+
+/* Alias clicable */
+#profile-name, #profile-alias {
+    cursor: pointer;
+    color: var(--brand-primary);
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+#profile-name:hover, #profile-alias:hover {
+    color: var(--brand-accent);
+    text-decoration: underline;
+}
+
+/* =========================
+   Sección de publicaciones
+========================= */
+.user-posts {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.user-posts h2 {
+    color: var(--brand-accent);
+    margin-bottom: 1rem;
+}
+
+/* Contenedor de publicaciones */
+#posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Card individual de publicación */
+.post-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
+}
+
+.post-card:hover {
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.post-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.post-card-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card-content h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--brand-primary);
+}
+
+.post-card-content p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin: 0.5rem 0 1rem 0;
+    flex-grow: 1;
+}
+
+/* Footer de la card */
+.post-card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.user-actions {
+    max-width: 800px;
+    margin: 1rem auto;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+
+.user-actions button {
+    background-color: var(--brand-primary);
+    border: none;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.user-actions button:hover {
+    background-color: var(--brand-emphasis);
+}
+
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 1024px) {
+    .user-info {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .user-posts {
+        max-width: 95%;
+        padding: 0 1rem;
+    }
+
+    .user-actions {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+}
+
+/* Tablets verticales y móviles grandes */
+@media (max-width: 768px) {
+    .user-info, .user-posts {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    #posts-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
+    }
+
+    .post-card img {
+        height: 150px;
+    }
+
+    .user-actions {
+        justify-content: center;
+    }
+
+    .user-actions button {
+  .user-actions button { flex: 0 0 auto; }
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .post-card-content h3 {
+        font-size: 1rem;
+    }
+
+    .post-card-content p {
+        font-size: 0.9rem;
+    }
+
+    #posts-container {
+        grid-template-columns: 1fr; /* una sola columna */
+    }
+
+  .user-actions {
+    flex-direction: column;    /* apila los botones */
+    align-items: center;       /* centra en el eje horizontal */
+    justify-content: center;   /* por si hay uno solo */
+    gap: 1rem;
+  }
+
+  .user-actions button {
+    width: 50%;          /* el ancho que quieres */
+    max-width: 320px;    /* opcional: tope razonable */
+    flex: 0 0 auto;      /* anula el flex:1 de tablet */
+    margin: 0 auto;      /* fallback para centrar */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   Sección de publicaciones mejorada
+========================= */
+
+/* Contenedor de publicaciones */
+#posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Card individual de publicación */
+.post-card {
+    background-color: var(--bg-card);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Imagen de la publicación */
+.post-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Contenido de la card */
+.post-card-content {
+    padding: 1rem 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card-content h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--brand-primary);
+    font-weight: 700;
+}
+
+.post-card-content p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin: 0.25rem 0;
+    flex-grow: 1;
+}
+
+/* Footer con íconos de interacción */
+.post-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--muted);
+    background-color: var(--bg-input);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.post-card-footer span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.post-card-footer i {
+    color: var(--brand-emphasis);
+}
+
+/* Hover en íconos */
+.post-card-footer span:hover {
+    color: var(--brand-accent);
+}
+
+/* Mejor espaciado y jerarquía */
+.post-card-content p strong {
+    color: var(--brand-accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .post-card img {
+        height: 150px;
+    }
+
+    #posts-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
+    }
+
+    .post-card-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .post-card-content p {
+        font-size: 0.9rem;
+    }
+
+    .post-card-footer {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #posts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .post-card img {
+        height: 140px;
+    }
+}

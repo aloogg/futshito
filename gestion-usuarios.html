@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Usuarios y Reportes</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="Public/css/gestion-usuarios.css">
+</head>
+
+<body>
+  <header>
+    <h1>Gestión de Usuarios y Estadísticas</h1>
+    <button onclick="window.location.href='admin.html'">Regresar al Panel</button>
+  </header>
+
+  <main>
+    <section class="seccion-tabla">
+      <h2><i class="fa-solid fa-users-gear"></i> Lista de Usuarios Registrados</h2>
+      <div class="table-responsive">
+        <table id="tabla-usuarios">
+          <thead>
+            <tr>
+              <th>Nombre completo</th>
+              <th>Fecha de nacimiento</th>
+              <th>Género</th>
+              <th>País nacimiento</th>
+              <th>Nacionalidad</th>
+              <th>Correo</th>
+            </tr>
+          </thead>
+          <tbody>
+            </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="seccion-reportes">
+      <h2><i class="fa-solid fa-chart-pie"></i> Reportes y Estadísticas</h2>
+      
+      <div class="contenedor-reportes">
+        
+        <div class="reporte-individual">
+          <h3><i class="fa-solid fa-earth-americas"></i> Usuarios por País</h3>
+          <ul id="rep-pais"><li>Cargando...</li></ul>
+        </div>
+        
+        <div class="reporte-individual">
+          <h3><i class="fa-solid fa-venus-mars"></i> Género de Usuarios</h3>
+          <ul id="rep-genero"><li>Cargando...</li></ul>
+        </div>
+
+        <div class="reporte-individual">
+          <h3><i class="fa-solid fa-heart"></i> Populares (Likes)</h3>
+          <ol id="rep-likes"><li>Cargando...</li></ol>
+        </div>
+
+        <div class="reporte-individual">
+          <h3><i class="fa-solid fa-eye"></i> Más Vistos</h3>
+          <ol id="rep-vistas"><li>Cargando...</li></ol>
+        </div>
+
+        <div class="reporte-individual">
+          <h3><i class="fa-solid fa-layer-group"></i> Por Categorías</h3>
+          <ul id="rep-categorias"><li>Cargando...</li></ul>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="Public/js/gestion-usuarios.js"></script>
+
+</body>
+</html>

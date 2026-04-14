@@ -1,0 +1,120 @@
+.datos-curiosos {
+  padding: 40px;
+  text-align: center;
+}
+
+.jugadores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.jugador-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  transition: transform 0.2s;
+}
+
+.jugador-card:hover {
+  transform: scale(1.05);
+}
+
+.jugador-card img {
+  width: 100%;
+  border-radius: 10px;
+  height: 200px;
+  object-fit: cover;
+}
+
+
+
+
+/* Datos curiosos API propia */
+.curiosos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.curioso-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: left;
+}
+
+.curioso-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.curioso-card h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.curioso-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ==============================
+   Formulario Agregar Dato Curioso
+   ============================== */
+.agregar-dato-curioso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.input-dato-curioso {
+    padding: 10px 15px;
+    border: 2px solid #3CB371; /* verde de tu paleta */
+    border-radius: 8px;
+    width: 300px;
+    font-size: 1rem;
+    background-color: #F8FEF9; /* input suave */
+    color: #3D3D3D;
+    transition: all 0.2s ease;
+}
+
+.input-dato-curioso:focus {
+    outline: none;
+    border-color: #F2A71B; /* naranja/acento */
+    box-shadow: 0 0 0 4px rgba(255,202,58,0.35); /* focus ring */
+}
+
+.btn-dato-curioso {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #FFCA3A; /* amarillo principal */
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-dato-curioso:hover {
+    background-color: #F2A71B; /* naranja/acento */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .input-dato-curioso {
+        width: 200px;
+    }
+}

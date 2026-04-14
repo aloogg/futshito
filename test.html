@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebGL</title>
+  </head>
+  <body onload="start()">
+    <canvas width="640" height="480" id="webglCanvas"></canvas>
+
+    <script type="text/javascript">
+      let canvas;
+      let gl;
+
+      let VERTEX_SOURCE = `#version 300 es
+      in vec2 in_position;
+
+      void main() {
+          gl_Position = vec4(in_position.x, in_position.y, 0, 1);
+      }
+      `;
+
+      let FRAGMENT_SOURCE = `#version 300 es
+      precision mediump float;
+      out vec4 color;
+
+      void main() {
+          color = vec4(1, 0, 0, 1); // rojo
+      }
+      `;
+
+      function start() {
+        canvas = document.getElementById("webglCanvas");
+        gl = canvas.getContext("webgl2");
+        if (!gl) {
+          console.error("No se puede iniciar WebGL2");
+          return;
+        }
+
+        // --- Compilar Vertex Shader ---
+        let vertexShader = gl.createShader(gl.VERTEX_SHADER);
+        gl.shaderSource(vertexShader, VERTEX_SOURCE);
+        gl.compileShader(vertexShader);
+        if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+          console.error(gl.getShaderInfoLog(vertexShader));
+          return;
+        }
+
+        // --- Compilar Fragment Shader ---
+        let fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+        gl.shaderSource(fragmentShader, FRAGMENT_SOURCE);
+        gl.compileShader(fragmentShader);
+        if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+          console.error(gl.getShaderInfoLog(fragmentShader));
+          return;
+        }
+
+        // --- Programa WebGL ---
+        let program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          console.error(gl.getProgramInfoLog(program));
+          return;
+        }
+
+        gl.useProgram(program);
+
+        let in_position_loc = gl.getAttribLocation(program, "in_position");
+
+        // *** CORRECTO ***
+        if (in_position_loc < 0) {
+          console.error("No se encontró el atributo in_position");
+          return;
+        }
+
+        gl.clearColor(0, 0, 0, 1);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        // =============================
+        //   🔺 DIBUJAR TRIÁNGULO
+        // =============================
+        let triangleBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, triangleBuffer);
+
+        let positionsTriangle = new Float32Array([
+          0, 0.5,
+          -0.5, -0.5,
+          0.5, -0.5
+        ]);
+
+        gl.bufferData(gl.ARRAY_BUFFER, positionsTriangle, gl.STATIC_DRAW);
+        gl.vertexAttribPointer(in_position_loc, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(in_position_loc);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+        // =============================
+        //   ⬛ DIBUJAR CUADRADO EXTRA
+        // =============================
+        let squareBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, squareBuffer);
+
+        let positionsSquare = new Float32Array([
+          -0.8, 0.2,
+          -0.4, 0.2,
+          -0.8, -0.2,
+
+          -0.4, 0.2,
+          -0.4, -0.2,
+          -0.8, -0.2
+        ]);
+
+        gl.bufferData(gl.ARRAY_BUFFER, positionsSquare, gl.STATIC_DRAW);
+        gl.vertexAttribPointer(in_position_loc, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(in_position_loc);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+      }
+    </script>
+  </body>
+</html>

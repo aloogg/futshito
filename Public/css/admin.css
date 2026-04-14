@@ -1,0 +1,166 @@
+:root {
+    /* Marca - versión más clara pero manteniendo identidad */
+    --brand-primary: #FFCA3A;   /* amarillo más claro */
+    --brand-accent:  #2E8B57;   /* verde más claro */
+    --brand-emphasis:#F2A71B;   /* naranja más claro */
+    --text-color:    #3D3D3D;   /* texto base ligeramente más claro */
+
+    /* Base claro - versión más clara */
+    --bg-page:       #FAF5E1;   /* fondo área de contenido */
+    --bg-card:       #FFFFFF;
+    --bg-input:      #F8FEF9;   /* verde muy suave */
+    --border:        #3CB371;   /* borde con el verde aclarado */
+    --muted:         #7E7E7E;   /* gris más claro */
+
+    /* Estados */
+    --focus-ring:    rgba(255, 202, 58, 0.35); /* ajustado al nuevo amarillo */
+    --shadow-1:      0 6px 20px rgba(0,0,0,0.08); /* sombra más suave */
+    --error-color:   #F67280;   /* error más claro */
+    --error-dark:    #FF8A8A;   /* error oscuro más claro */
+
+    /* Oscuro - deshabilitado para forzar modo claro */
+    --bg-page-dark:  #FFF9E6;   /* mismo que claro */
+    --bg-card-dark:  #FFFFFF;   /* mismo que claro */
+    --bg-input-dark: #F8FEF9;   /* mismo que claro */
+    --border-dark:   #3CB371;   /* mismo que claro */
+    --text-dark:     #3D3D3D;   /* mismo que claro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: var(--brand-primary);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-1);
+}
+
+header h1 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+}
+
+header button {
+    background-color: var(--brand-accent);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+header button:hover {
+    background-color: #267349;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+section {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--border);
+}
+
+section h2 {
+    color: var(--brand-accent);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brand-primary);
+}
+
+input, textarea {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background-color: var(--bg-input);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--focus-ring);
+    border-color: var(--brand-primary);
+}
+
+button[type="submit"], button {
+    background-color: var(--brand-primary);
+    color: var(--text-color);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover, button:hover {
+    background-color: var(--brand-emphasis);
+}
+
+#mundial-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+#pendientes {
+    min-height: 200px;
+    border: 2px dashed var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    text-align: center;
+    color: var(--muted);
+}
+
+@media (min-width: 768px) {
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    #mundial-form {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    #mundial-form textarea,
+    #mundial-form button {
+        grid-column: span 2;
+    }
+}
+
+@media (min-width: 1024px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    section:nth-child(3) {
+        grid-column: span 3;
+    }
+}

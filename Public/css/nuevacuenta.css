@@ -1,0 +1,316 @@
+
+
+/* ========= Fuentes ========= */
+@font-face {
+  font-family: "Honey Money";
+  src: url(fonts/HoneyMoney.ttf) format("truetype");
+}
+
+/* ========= Variables de tema ========= */
+:root {
+  /* Marca */
+  --brand-primary: #FFB905;   /* principal */
+  --brand-accent:  #1D7150;   /* acento */
+  --brand-emphasis:#de9503;   /* palabras/acentos textuales */
+  --text-color:    #2E2E2E;   /* texto base */
+
+  /* Base claro */
+  --bg-page:       #FAF5E1;   /* fondo área de contenido */
+  --bg-card:       #FFFFFF;
+  --bg-input:      #F5FAF7;   /* leve tinte verdoso del acento */
+  --border:        #1D7150;
+  --muted:         #6E6E6E;
+
+  /* Estados */
+  --focus-ring:    rgba(255, 185, 5, 0.35);
+  --shadow-1:      0 6px 20px rgba(0,0,0,0.10);
+  --error-color:   #E63946;
+  --error-dark:    #FF5E5E;
+
+  /* Oscuro */
+  --bg-page-dark:  #121212;
+  --bg-card-dark:  #1E1E1E;
+  --bg-input-dark: #232323;
+  --border-dark:   #2A2A2A;
+  --text-dark:     #F2F2F2;
+}
+
+/* ===== Tipografía de marca ===== */
+body {
+  font-family: "Honey Money";
+  background: 
+    linear-gradient(to bottom, 
+      var(--bg-page) 0%, 
+      rgba(255, 248, 225, 0.8) 100%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* ===== Contenedor principal ===== */
+.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===== Caja registro ===== */
+.register-box {
+  background: var(--bg-card);
+border-radius: 15px;
+    padding: 30px;
+    /* width: 100%; */
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* ===== Logo ===== */
+.logo img {
+  max-width: 140px;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Encabezado ===== */
+h1 {
+  color: var(--brand-emphasis);
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* ===== Formulario ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+/* Labels */
+form label {
+  font-size: 0.9rem;
+  color: var(--brand-accent);
+  font-weight: bold;
+}
+
+/* Inputs */
+form input,
+form select {
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  border: 2px solid var(--border);
+  background: var(--bg-input);
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+/* Focus */
+form input:focus,
+form select:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+/* Botón Registrar */
+form button {
+  background: var(--brand-primary);
+  color: #fff;
+  border: none;
+  padding: 0.9rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background: var(--brand-emphasis);
+}
+
+/* ===== Link login ===== */
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.login-link a {
+  color: var(--brand-accent);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Términos ===== */
+.terms {
+    font-size: 0.75rem;
+    color: var(--brand-accent);
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* ===== Toggle tema ===== */
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--brand-accent);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    display: block;
+    line-height: 1.3;
+    padding: 2px 5px;
+    animation: fadeIn 0.3s ease;
+}
+
+input.invalid {
+    border-color: var(--error-color) !important;
+    animation: shake 0.5s ease;
+}
+
+/* ===== Estilos modo oscuro ===== */
+body.dark {
+  background-color: var(--bg-page-dark);
+  color: var(--text-dark);
+}
+
+body.dark .register-box {
+  background: var(--bg-card-dark);
+}
+
+body.dark form input,
+body.dark form select {
+  background: var(--bg-input-dark);
+  border: 2px solid var(--border-dark);
+  color: var(--text-dark);
+}
+
+body.dark form label {
+  color: var(--brand-primary);
+}
+
+body.dark .login-link a {
+  color: var(--brand-primary);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======== Responsividad ======== */
+
+
+/* Celulares grandes (pantallas menores a 768px) */
+@media (max-width: 768px) {
+  .register-box {
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  form {
+    gap: 0.8rem;
+  }
+
+  form input,
+  form select {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  form button {
+    font-size: 1rem;
+    padding: 0.75rem;
+    width: 100%;
+  }
+
+  .logo img {
+    max-width: 120px;
+  }
+}
+
+/* Celulares pequeños (pantallas menores a 480px) */
+@media (max-width: 480px) {
+
+  .register-box {
+    max-width: 100%;
+    padding: 15px;
+    border-radius: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  form input,
+  form select {
+    font-size: 0.85rem;
+    padding: 0.55rem 0.75rem;
+    width: 100%;
+  }
+
+  form button {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+    width: 100%;
+  }
+
+  .logo img {
+    max-width: 100px;
+  }
+}

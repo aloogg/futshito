@@ -1,0 +1,108 @@
+:root {
+    /* Colores del modo claro */
+    --color-background: #FAF5E1;
+    --color-primary: #5A2E1B;
+    --color-accent: #3399CC;
+    --color-accent-hover: #2B80AD;
+    --color-yellow-light: #E6B800;
+    --color-yellow-light-dark: #B38A00;
+
+    /* Colores del modo oscuro */
+    --color-background-dark: #1a1a1a;
+    --color-header-dark: #2d2d2d;
+    --color-primary-dark: #7A4C2E;
+    --color-accent-dark: #4D87D0;
+    --color-yellow-dark: #F1C200;
+    --color-yellow-dark-dark: #C78A00;
+
+    /* Colores adicionales */
+    --color-white: white;
+    --color-gray: #eeeeee;
+    --color-gray-medium: #DDDDDD;
+    --color-border: #c5c5c5;
+    --color-black-transparent: rgba(0, 0, 0, 0.5);
+
+    /* Colores adicionales para el modo oscuro */
+    --color-border-dark: #5c5c5c;
+    --color-background-button-dark: #2d2d2d;
+    --color-button-hover-dark: #3d3d3d;
+}
+
+:root {
+  /* Marca */
+  --brand-primary: #FFB905;   /* principal */
+  --brand-accent:  #1D7150;   /* acento */
+  --brand-emphasis:#de9503;   /* palabras/acentos textuales */
+  --text-color:    #2E2E2E;   /* texto base */
+
+  /* Base claro */
+  --bg-page:       #FAF5E1;   /* fondo área de contenido */
+  --bg-card:       #FFFFFF;
+  --bg-input:      #F5FAF7;   /* leve tinte verdoso del acento */
+  --border:        #1D7150;
+  --muted:         #6E6E6E;
+
+  /* Estados */
+  --focus-ring:    rgba(255, 185, 5, 0.35);
+  --shadow-1:      0 6px 20px rgba(0,0,0,0.10);
+  --error-color:   #E63946;
+  --error-dark:    #FF5E5E;
+
+  /* Oscuro */
+  --bg-page-dark:  #121212;
+  --bg-card-dark:  #1E1E1E;
+  --bg-input-dark: #232323;
+  --border-dark:   #2A2A2A;
+  --text-dark:     #F2F2F2;
+}
+
+/* Footer mejorado */
+footer {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--color-yellow-dark) 100%);
+    color: var(--color-primary);
+    padding: 40px 20px 60px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    border-top: 3px solid var(--brand-accent);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.contact-section p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.copyright {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+    .contact-sections {
+        flex-direction: column;
+    }
+    
+    .footer-container {
+
+        padding-bottom: 50px;
+    }
+
+}

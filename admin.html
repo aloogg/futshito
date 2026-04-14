@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Admin - Futshito</title>
+  <link rel="stylesheet" href="Public/css/admin.css">
+</head>
+<body>
+  <header>
+    <h1>Panel de Administración</h1>
+    <button onclick="logout()">Cerrar sesión</button>
+    <button onclick="window.location.href='gestion-usuarios.html'">Gestión de Usuarios</button>
+  </header>
+
+  <main>
+    <section>
+      <h2>Crear Categoría</h2>
+      <input type="text" id="categoria" placeholder="Ej. Mundiales">
+      <div id="mensaje-categoria"></div>
+      <button onclick="crearCategoria()">Agregar</button>
+    </section>
+
+  <section>
+    <h2>Crear Página de Mundial</h2>
+    <form id="mundial-form">
+      <input type="text" id="nombre-mundial" placeholder="Nombre del Mundial">
+      <input type="number" id="anio-mundial" placeholder="Año">
+      <input type="text" id="sede-mundial" placeholder="Sede">
+
+      <select id="categoria-mundial">
+        <option value="">Selecciona una categoría</option>
+      </select>
+
+      <textarea id="resena-mundial" placeholder="Breve reseña"></textarea>
+
+      <input type="file" id="imagen-mundial" style="display:none">
+      <button type="button" id="btn-select-image">Seleccionar Imagen</button>
+      <span id="selected-image-name">Ningún archivo seleccionado</span>
+
+      <button type="submit">Crear</button>
+    </form>
+
+  </section>
+
+
+    <section>
+      <h2>Publicaciones pendientes</h2>
+      <div id="pendientes">
+        <!-- Aquí se mostrarán publicaciones de usuarios para aprobar/rechazar -->
+      </div>
+    </section>
+
+    <section>
+  <h2>Comentarios reportados</h2>
+  <div id="comentarios-reportados"></div>
+</section>
+
+
+  </main>
+
+  <script>
+    function logout(){
+      localStorage.removeItem("role");
+      window.location.href = "login.html";
+    }
+  </script>
+  
+<!-- <script src="Public/js/admin.js"></script> -->
+
+<!-- <script src="Public/js/admin2.js"></script> -->
+
+<script src="Public/js/admin3.js"></script>
+
+<!-- <script src="Public/js/admin-actions.js"></script> -->
+
+<!-- <script src="Public/js/middleware.js"></script> -->
+
+</body>
+</html>

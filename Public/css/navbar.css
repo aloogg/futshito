@@ -1,0 +1,105 @@
+:root {
+    /* Colores del modo claro */
+    --color-background: var(--bg-page);          /* #FAF5E1 */
+    --color-primary: var(--brand-emphasis);      /* #7A3911 */
+    --color-accent: var(--brand-accent);         /* #1D7150 */
+    --color-yellow-light: var(--brand-primary);  /* #FFB905 */
+    --color-yellow-dark: #CC9F00; /* puedes ajustarlo si quieres un tono más oscuro del amarillo */
+
+    /* Colores del modo oscuro */
+    --color-background-dark: var(--bg-page-dark, #121212);
+    --color-primary-dark: var(--brand-emphasis); 
+    --color-accent-dark: var(--brand-accent); 
+    --color-yellow-light-dark: var(--brand-primary); 
+    --color-yellow-dark-dark: #C78A00;
+
+    /* Colores adicionales */
+    --color-white: #FFFFFF;
+    --color-gray: #eeeeee;
+    --color-gray-medium: #DDDDDD;
+    --color-border: var(--border);              /* #1D7150 */
+    --color-black-transparent: rgba(0, 0, 0, 0.5);
+
+    /* Colores adicionales para el modo oscuro */
+    --color-border-dark: var(--border-dark, #2A2A2A);
+    --color-background-button-dark: var(--bg-input-dark, #232323);
+    --color-button-hover-dark: #3d3d3d;
+}
+
+:root {
+  /* Marca */
+  --brand-primary: #FFB905;   /* principal */
+  --brand-accent:  #1D7150;   /* acento */
+  --brand-emphasis:#de9503;   /* palabras/acentos textuales */
+  --text-color:    #2E2E2E;   /* texto base */
+
+  /* Base claro */
+  --bg-page:       #FAF5E1;   /* fondo área de contenido */
+  --bg-card:       #FFFFFF;
+  --bg-input:      #F5FAF7;   /* leve tinte verdoso del acento */
+  --border:        #1D7150;
+  --muted:         #6E6E6E;
+
+  /* Estados */
+  --focus-ring:    rgba(255, 185, 5, 0.35);
+  --shadow-1:      0 6px 20px rgba(0,0,0,0.10);
+  --error-color:   #E63946;
+  --error-dark:    #FF5E5E;
+
+  /* Oscuro */
+  --bg-page-dark:  #121212;
+  --bg-card-dark:  #1E1E1E;
+  --bg-input-dark: #232323;
+  --border-dark:   #2A2A2A;
+  --text-dark:     #F2F2F2;
+}
+
+/* Barra inferior fija */
+.sticky-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+.sticky-nav a {
+    text-decoration: none;
+    color: var(--color-yellow-light);
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.sticky-nav a:hover {
+    background-color: rgba(255, 185, 5, 0.15); /* amarillo con transparencia */
+    transform: translateY(-3px);
+}
+
+.sticky-nav i {
+    font-size: 24px;
+    color: var(--color-yellow-light);
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .sticky-nav {
+        display: flex;
+    }
+}
+
+@media (min-width: 1024px) {
+    .sticky-nav {
+        display: none;
+    }
+}

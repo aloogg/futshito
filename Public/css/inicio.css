@@ -1,0 +1,475 @@
+:root {
+  /* Marca */
+  --brand-primary: #FFB905;   /* principal */
+  --brand-accent:  #1D7150;   /* acento */
+  --brand-emphasis:#de9503;   /* palabras/acentos textuales */
+  --text-color:    #2E2E2E;   /* texto base */
+
+  /* Base claro */
+  --bg-page:       #FAF5E1;   /* fondo área de contenido */
+  --bg-card:       #FFFFFF;
+  --bg-input:      #F5FAF7;   /* leve tinte verdoso del acento */
+  --border:        #1D7150;
+  --muted:         #6E6E6E;
+
+  /* Estados */
+  --focus-ring:    rgba(255, 185, 5, 0.35);
+  --shadow-1:      0 6px 20px rgba(0,0,0,0.10);
+  --error-color:   #E63946;
+  --error-dark:    #FF5E5E;
+
+  /* Oscuro */
+  --bg-page-dark:  #121212;
+  --bg-card-dark:  #1E1E1E;
+  --bg-input-dark: #232323;
+  --border-dark:   #2A2A2A;
+  --text-dark:     #F2F2F2;
+}
+
+#user-name {
+    cursor: pointer;
+    color: var(--brand-primary);
+    text-decoration: underline; 
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--text-color);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-1);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--brand-accent);
+}
+
+.logo img {
+    height: 80px;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  max-width: 500px;
+  margin: 0 2rem;
+}
+
+.search-bar input {
+    margin-left: 20px;
+  flex: 1;
+  padding: 0.5rem;
+  border: 2px solid var(--border);
+  border-radius: 6px 0 0 6px;
+  background: var(--bg-input);
+}
+
+.search-bar button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--brand-primary);
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+}
+
+/* Botones */
+.btn-primary {
+  background: var(--brand-primary);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--brand-accent);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Main layout */
+.content {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+  flex: 1;
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-1);
+}
+
+.highlight {
+  color: var(--brand-emphasis);
+}
+
+
+
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--brand-primary);
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.main-nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.main-nav .nav-link {
+    text-decoration: none;
+    color: #2E2E2E; /* Cambia según tu diseño */
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.main-nav .nav-link:hover {
+    color: #FFB905; /* Color de acento */
+}
+
+
+
+/* Media Queries para Responsividad */
+/* Tabletas (hasta 1024px) */
+@media (max-width: 1024px) {
+    .search-bar {
+        order: 3;
+        max-width: 100%;
+        margin: 1rem 0 0 0;
+        width: 100%;
+    }
+    
+    .header {
+        padding: 1rem;
+    }
+}
+
+/* Header móvil: logo + buscador + menú hamburguesa */
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+
+    .search-bar {
+        order: 2;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .main-nav {
+        display: none; /* Se puede reemplazar por un menú hamburguesa */
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .logo img {
+        height: 50px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .header {
+        padding: 0.5rem;
+    }
+    
+    .logo img {
+        height: 50px;
+    }
+}
+
+
+
+
+/* Contenedor de las cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* Tarjeta individual */
+.card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Imagen de la card */
+.card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* Contenido de la card */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0.75rem 1rem 0.25rem 1rem;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0 1rem 0.5rem 1rem;
+}
+
+.card-info {
+  font-size: 0.85rem;
+  color: var(--text-color);
+  margin: 0 1rem 1rem 1rem;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+/* Pie de la card con iconos */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem 1rem 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid #eee;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .card-img {
+    height: 140px;
+  }
+}
+
+
+
+
+
+/* Contenedor grid de mundiales */
+.worldcup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas fijas */
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+}
+
+
+
+/* Tarjeta individual de Mundial */
+.worldcup-item {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.worldcup-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Imagen del mundial */
+.worldcup-img-container {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+}
+
+.worldcup-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Nombre del mundial */
+.worldcup-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--brand-emphasis);
+  border-top: 1px solid #eee;
+}
+
+@media (max-width: 1024px) {
+  .worldcup-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 por fila en tablet */
+  }
+}
+
+@media (max-width: 600px) {
+  .worldcup-grid {
+    grid-template-columns: 1fr; /* 1 por fila en móvil */
+  }
+}
+
+
+
+
+
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow-y: auto; 
+  background-color: rgba(0,0,0,0.6);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 40px auto; 
+  border-radius: 10px;
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute; /* relativo al modal */
+  top: 15px;
+  right: 20px;
+  border-radius: 50%;
+  padding: 0.5em;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--brand-primary);
+  color: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #fff; /* fondo crema */
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: yellow;
+  border: 2px solid var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+
+
+.modal-img-wrapper {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f0dc; /* color crema */
+  padding: 15px; /* espacio alrededor de la imagen */
+  border-radius: 10px; /* esquinas redondeadas opcional */
+  box-sizing: border-box;
+}
+
+.modal-img-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px; /* esquinas de la imagen */
+}
+
+
+.modal-text {
+  padding: 20px;
+  text-align: center;
+}
+
+.modal-text h3 {
+  margin-bottom: 10px;
+}
+
+.modal-text p {
+  margin: 5px 0;
+}
+
+.modal-footer {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+@media screen and (max-width: 600px) {
+  .modal-content {
+    margin: 20px auto;
+    max-width: 95%;
+  }
+  .modal-img-wrapper {
+    max-height: 250px;
+  }
+}
