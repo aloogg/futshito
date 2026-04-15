@@ -1,17 +1,14 @@
-// conexion.js
 const mongoose = require('mongoose');
 
-// Cambia 'bd_capamundial' por el nombre que quieras para tu base real
-const url = 'mongodb://127.0.0.1:27017/bd_capamundial';
+const url = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/bd_capamundial';
 
 const conectarDB = async () => {
   try {
-    // Mongoose se encarga de la magia de la conexión
+    // Si la URL es la de Atlas, tardará un poquito más en conectar
     await mongoose.connect(url);
-    console.log('¡Conexión exitosa con Mongoose!');
+    console.log('¡Conexión exitosa a MongoDB!');
   } catch (error) {
     console.error('Error conectando a la base de datos:', error);
-    process.exit(1); // Detiene la app si no hay base de datos
   }
 };
 
