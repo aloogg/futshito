@@ -17,17 +17,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configurar dónde se guardan las fotos (Public/uploads)
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'Public', 'uploads')); 
-    },
-    filename: function (req, file, cb) {
-        // Nombre único: fecha + nombre original
-        cb(null, Date.now() + '-' + file.originalname);
-    }
+// Reemplaza el bloque de storage y upload por este:
+const storage = multer.memoryStorage(); 
+const upload = multer({ 
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 } // Límite de 5MB
 });
-const upload = multer({ storage: storage });
 
 // Conectar a Mongo
 conectarDB();
@@ -65,7 +60,8 @@ app.post('/api/registrar', upload.single('foto'), async (req, res) => {
             nacionalidad: req.body.nacionalidad,
             correo: req.body.email,
             contrasena: req.body.password,
-            foto: req.file ? `/Public/uploads/${req.file.filename}` : null
+            // Dentro de app.post('/api/registrar')
+            foto: req.file ? "https://via.placeholder.com/150" : null
         });
 
         await nuevoUsuario.save();
