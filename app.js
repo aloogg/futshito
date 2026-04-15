@@ -631,3 +631,5 @@ app.get('/api/reportes', async (req, res) => {
 app.listen(3000, () => {
     console.log('Servidor corriendo. Abre: http://localhost:3000');
 });
+
+module.exports = app;
