@@ -31,6 +31,9 @@
 
   <link rel="stylesheet" href="Public/css/publica.css">
 
+  <link rel="stylesheet" href="Public/css/ayuda.css">
+
+
 </head>
 <body>
 
@@ -208,6 +211,19 @@
   </div>
 </div>
 
+<button id="btn-manual-ayuda" class="btn-flotante">
+  ❓ Ayuda
+</button>
+
+<div id="ventana-manual" class="modal-manual oculto">
+  <div class="manual-header">
+    <h3>Manual de Usuario FUTSHITO</h3>
+    <button id="cerrar-manual" class="btn-cerrar">✖</button>
+  </div>
+  <div class="manual-contenido">
+    </div>
+</div>
+
 <!-- Al final del body -->
 
 <script src="Public/js/auth.js"></script>
@@ -237,6 +253,9 @@
 
 
 <script src="Public/js/mundiales-admin.js"></script>
+
+<script src="Public/js/ayuda.js"></script>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
