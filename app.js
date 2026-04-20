@@ -3,7 +3,10 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const mongoose = require('mongoose'); 
-const conectarDB = require('./conexion'); 
+const conectarDB = require('./conexion');
+
+const axios = require('axios');
+const FormData = require('form-data');
 
 // IMPORTANTE: Importamos TODOS los modelos AQUÍ una sola vez
 const { Usuario, Publicacion, Categoria, Like, Comentario, Mundial, DatoCurioso } = require('./App/models/esquemas');
@@ -17,22 +20,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const storage = multer.diskStorage({
-    // 1. Le decimos en qué carpeta exacta se va a guardar
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'Public/uploads')) 
-    },
-    // 2. Le damos un nombre único para que no se sobreescriban fotos con el mismo nombre
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    }
+// CONFIGURACIÓN DE MULTER PARA IMGBB
+const upload = multer({ 
+    storage: multer.memoryStorage(), // Se guarda en RAM
+    limits: { fileSize: 5 * 1024 * 1024 } // Límite de 5MB
 });
 
-const upload = multer({ 
-    storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 } 
-});
+// Tu API Key de ImgBB (Pon aquí la que copiaste en el Paso 1)
+const IMGBB_API_KEY = 'd9c3ba6c9e03d0338a88e13c38b737d4';
 
 // Conectar a Mongo
 conectarDB();
@@ -116,18 +111,16 @@ app.post('/api/login', async (req, res) => {
 // 4. API: PUBLICACIONES (Usuarios)
 // ==========================================
 
-// Crear Publicación (Usuario)
+// Crear Publicación (Usuario) - CON IMGBB
 app.post('/api/publicaciones', upload.single('media'), async (req, res) => {
     try {
-        console.log("Recibiendo publicación...");
+        console.log("Recibiendo publicación para la nube...");
         const { id_usuario, title, content, category, worldcup, country } = req.body;
 
         const usuarioDb = await Usuario.findById(id_usuario);
         if (!usuarioDb) return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
 
-        // Buscar categoría por nombre o crear objeto temporal
         let categoriaDb = await Categoria.findOne({ nombre: category });
-        
         const categoriaData = categoriaDb ? {
             _id: categoriaDb._id,
             nombre: categoriaDb.nombre
@@ -135,6 +128,27 @@ app.post('/api/publicaciones', upload.single('media'), async (req, res) => {
             _id: new mongoose.Types.ObjectId(),
             nombre: category
         };
+
+        // ==========================================
+        // MAGIA DE IMGBB: Subir la foto a la nube
+        // ==========================================
+        let imageUrl = null;
+
+        if (req.file) {
+            console.log("Subiendo imagen a ImgBB...");
+            const base64Image = req.file.buffer.toString('base64');
+            const form = new FormData();
+            form.append('image', base64Image);
+
+            const response = await axios.post(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, form, {
+                headers: form.getHeaders()
+            });
+
+            if (response.data && response.data.data && response.data.data.url) {
+                imageUrl = response.data.data.url;
+                console.log("✅ Imagen de publicación subida:", imageUrl);
+            }
+        }
 
         const nuevaPublicacion = new Publicacion({
             usuario: {
@@ -147,8 +161,8 @@ app.post('/api/publicaciones', upload.single('media'), async (req, res) => {
             mundial: worldcup,
             categoria: categoriaData,
             pais: country, 
-            multimedia: req.file ? `/Public/uploads/${req.file.filename}` : null,
-            aprobado: false, // Pendiente de revisión
+            multimedia: imageUrl, // <-- Guardamos el link de ImgBB
+            aprobado: false,
             fecha_creacion: new Date()
         });
 
@@ -156,8 +170,8 @@ app.post('/api/publicaciones', upload.single('media'), async (req, res) => {
         res.json({ success: true, message: 'Publicación enviada a revisión.' });
 
     } catch (error) {
-        console.error("Error al crear post:", error);
-        res.status(500).json({ success: false, message: error.message });
+        console.error("Error al crear post:", error.message);
+        res.status(500).json({ success: false, message: 'Error al subir la publicación o la imagen.' });
     }
 });
 
@@ -294,11 +308,32 @@ app.get('/api/categorias', async (req, res) => {
     }
 });
 
-// Crear Mundial (Admin)
+// Crear Mundial (Admin) - CON IMGBB
 app.post('/api/mundiales', upload.single('logo'), async (req, res) => {
     try {
-        console.log("Creando mundial...");
+        console.log("Creando mundial en la nube...");
         const { nombre, anio, sede, descripcion, id_categoria } = req.body;
+
+        // ==========================================
+        // MAGIA DE IMGBB PARA EL LOGO DEL MUNDIAL
+        // ==========================================
+        let logoUrl = null;
+
+        if (req.file) {
+            console.log("Subiendo logo de mundial a ImgBB...");
+            const base64Image = req.file.buffer.toString('base64');
+            const form = new FormData();
+            form.append('image', base64Image);
+
+            const response = await axios.post(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, form, {
+                headers: form.getHeaders()
+            });
+
+            if (response.data && response.data.data && response.data.data.url) {
+                logoUrl = response.data.data.url;
+                console.log("✅ Logo de mundial subido:", logoUrl);
+            }
+        }
 
         const nuevoMundial = new Mundial({
             nombre,
@@ -306,15 +341,15 @@ app.post('/api/mundiales', upload.single('logo'), async (req, res) => {
             sede,
             descripcion,
             id_categoria: id_categoria ? new mongoose.Types.ObjectId(id_categoria) : null,
-            logo: req.file ? `/Public/uploads/${req.file.filename}` : null
+            logo: logoUrl // <-- Guardamos el link de ImgBB
         });
 
         await nuevoMundial.save();
         res.json({ success: true, message: 'Mundial creado exitosamente' });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: error.message });
+        console.error("Error al crear mundial:", error.message);
+        res.status(500).json({ success: false, message: 'Error al subir el mundial o la imagen.' });
     }
 });
 
