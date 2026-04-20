@@ -17,11 +17,21 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Reemplaza el bloque de storage y upload por este:
-const storage = multer.memoryStorage(); 
+const storage = multer.diskStorage({
+    // 1. Le decimos en qué carpeta exacta se va a guardar
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, 'Public/uploads')) 
+    },
+    // 2. Le damos un nombre único para que no se sobreescriban fotos con el mismo nombre
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
 const upload = multer({ 
     storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 } // Límite de 5MB
+    limits: { fileSize: 5 * 1024 * 1024 } 
 });
 
 // Conectar a Mongo
